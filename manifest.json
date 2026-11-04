@@ -2,12 +2,20 @@
   "manifest_version": 3,
   "name": "PDF Last Page",
   "version": "0.1.0",
-  "description": "Keeps a list of the PDFs you open in the browser.",
+  "description": "Opens PDFs in the browser and remembers the last page you read.",
   "author": {
     "email": "Damon@Achey.net"
   },
-  "permissions": ["storage", "tabs", "webRequest"],
-  "host_permissions": ["<all_urls>"],
+  "minimum_chrome_version": "151",
+  "permissions": ["storage"],
+  "mime_types_handler": {
+    "application/pdf": {
+      "handler_url": "pdfjs/web/viewer.html"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -21,8 +29,5 @@
       "16": "icons/icon16.png",
       "32": "icons/icon32.png"
     }
-  },
-  "background": {
-    "service_worker": "background.js"
   }
 }

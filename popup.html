@@ -11,7 +11,15 @@
       <span id="popup_title">PDF Last Page</span>
     </div>
     <div class="list_container">
-      <ul id="pdf_list"></ul>
+      <table id="pdf_table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col" class="last_page">Last page</th>
+          </tr>
+        </thead>
+        <tbody id="pdf_list"></tbody>
+      </table>
     </div>
     <script src="popup.js"></script>
   </body>
