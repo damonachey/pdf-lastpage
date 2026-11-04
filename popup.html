@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>PDF Last Page</title>
-    <style>
-      body {
-        min-width: 200px;
-        font-family: system-ui, sans-serif;
-      }
-    </style>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <h1>PDF Last Page</h1>
+    <div class="header_container">
+      <img src="icons/icon128.png" alt="" id="popup_icon">
+      <span id="popup_title">PDF Last Page</span>
+    </div>
+    <div class="list_container">
+      <ul id="pdf_list"></ul>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>
