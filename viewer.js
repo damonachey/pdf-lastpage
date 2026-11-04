@@ -67,6 +67,9 @@ document.addEventListener("webviewerloaded", () => {
   // Without this the viewer loads its bundled default document on startup.
   PDFViewerApplicationOptions.set("defaultUrl", "");
 
+  // JavaScript embedded in a PDF would be code from outside the extension package.
+  PDFViewerApplicationOptions.set("enableScripting", false);
+
   openPdf().catch((error) => {
     console.error("Could not open PDF:", error);
     chrome.mimeHandler.abortAndFallbackToNativeHandler();
