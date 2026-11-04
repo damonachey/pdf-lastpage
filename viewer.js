@@ -1,5 +1,7 @@
 // Connects the bundled PDF.js viewer to chrome.mimeHandler and saves the last page.
 
+import { getPdfTitle } from "./pdf-title.js";
+
 function savePdfToList(pdfUrl) {
   console.log("PDF opened:", pdfUrl);
 
@@ -11,17 +13,14 @@ function savePdfToList(pdfUrl) {
   });
 }
 
-// Not every PDF has a usable title, so failing to read one is not an error.
-async function saveTitle(pdfUrl) {
-  try {
-    const { info, metadata } = await PDFViewerApplication.pdfDocument.getMetadata();
-    const title = (metadata?.get("dc:title") || info?.Title || "").trim();
+async function saveTitle(pdfUrl, responseHeaders) {
+  const titleKey = `title:${pdfUrl}`;
+  const title = await getPdfTitle(PDFViewerApplication.pdfDocument, pdfUrl, responseHeaders);
 
-    if (title && title !== "Untitled") {
-      await chrome.storage.local.set({ [`title:${pdfUrl}`]: title });
-    }
-  } catch (error) {
-    console.warn("Could not read PDF title:", error);
+  if (title) {
+    await chrome.storage.local.set({ [titleKey]: title });
+  } else {
+    await chrome.storage.local.remove(titleKey);
   }
 }
 
@@ -39,7 +38,7 @@ function trackLastPage(pageKey) {
 }
 
 async function openPdf() {
-  const { originalUrl, streamUrl } = await chrome.mimeHandler.getStreamInfo();
+  const { originalUrl, responseHeaders, streamUrl } = await chrome.mimeHandler.getStreamInfo();
   const response = await fetch(streamUrl);
   const data = new Uint8Array(await response.arrayBuffer());
 
@@ -60,7 +59,7 @@ async function openPdf() {
   await PDFViewerApplication.open({ data, originalUrl: pdfUrl });
 
   trackLastPage(pageKey);
-  await saveTitle(pdfUrl);
+  await saveTitle(pdfUrl, responseHeaders);
   await savePdfToList(pdfUrl);
 }
 
