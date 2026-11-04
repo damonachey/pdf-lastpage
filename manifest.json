@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "PDF Last Page",
+  "version": "0.1.0",
+  "description": "PDF Last Page Chrome extension.",
+  "action": {
+    "default_title": "PDF Last Page",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
