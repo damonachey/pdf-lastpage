@@ -78,6 +78,69 @@ body {
   cursor: default;
 }
 
+#pdf_table .remove {
+  width: 16px;
+  padding-left: 0;
+  text-align: center;
+}
+
+.remove_button {
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: #888888;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.remove_button:hover,
+.remove_button:focus-visible {
+  color: #000000;
+  outline: none;
+}
+
+#pdf_list .confirm_row,
+#pdf_list .confirm_row:hover {
+  cursor: default;
+  background-color: #f0f0f0;
+}
+
+.confirm_cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.confirm_message {
+  margin-right: auto;
+}
+
+.confirm_cell button {
+  padding: 5px 15px;
+  color: #dddddd;
+  background-color: #666666;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.confirm_cell button:hover,
+.confirm_cell button:focus-visible {
+  color: #ffffff;
+  background-color: #444444;
+  outline: none;
+}
+
+.confirm_cell .confirm_remove {
+  background-color: #d32f2f;
+}
+
+.confirm_cell .confirm_remove:hover,
+.confirm_cell .confirm_remove:focus-visible {
+  background-color: #a01a1a;
+}
+
 ::-webkit-scrollbar {
   width: 20px;
 }
